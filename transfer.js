@@ -70,7 +70,7 @@ else{
 function selectSeason(){
   const selectElement=document.querySelector('#season').value;
   seasonDate=selectElement;
-	seasonday=1;
+	seasonday='1';
   load();
 }
 function selectDay(){
