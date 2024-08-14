@@ -1,5 +1,5 @@
-let seasonDate='2023';
-let seasonday='28';
+let seasonDate='2024';
+let seasonday='1';
 load();
 function load(){
   const url = `https://transfermarkt-db.p.rapidapi.com/v1/competitions/play-day-matches?locale=DE&competition_id=GB1&match_day=${seasonday}&season_id=${seasonDate}`;
@@ -70,11 +70,13 @@ else{
 function selectSeason(){
   const selectElement=document.querySelector('#season').value;
   seasonDate=selectElement;
+	seasonday=1;
   load();
 }
 function selectDay(){
   const selectElement=document.querySelector('.Day-search').value;
   seasonday=selectElement;
+
   load();
 }
 
