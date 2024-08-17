@@ -21,13 +21,14 @@ async function football(){
         matchesList = footballDetails.map((items) => {
             return items;
         });
-        
+      
         let html = '';
         console.log(matchesList);
         matchesList.forEach((footballMatch) => {
             html += `
                 <div class="matchBox">
                 <p>${date(footballMatch)}</p>
+                <p class='time'>${live(footballMatch.resultObject)}</p>
                     <div class="matchContainer">
                         <div class="team">
                             <div class="img"><img src="${footballMatch.homeClubImage}" alt=""></div>
@@ -40,6 +41,18 @@ async function football(){
                         </div>
                     </div>
                 </div>`;
+
+                function live(matchDetail){
+                  if(matchDetail.minute!==0 && matchDetail.state!=31){
+                    return `${matchDetail.minute}'`;
+                  }
+                  else if(matchDetail.minute!==0 && matchDetail.state==31){
+                    return `Half-Time`;
+                  }
+                  else{
+                    return '';
+                  }
+                }
         });
         
         document.querySelector('.container').innerHTML = html;
@@ -60,8 +73,11 @@ else{
 }
 function date(footballMatch){
  console.log(footballMatch.fullMatchDate)
-if(footballMatch.fullMatchDate!=='-:-'){
-return `<div class="team">${footballMatch.fullMatchDate}(${footballMatch.matchTime})</div>`;
+if(footballMatch.fullMatchDate!=='-:-' && footballMatch.resultObject.state===''){
+return `<div class="team">${footballMatch.fullMatchDate}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${footballMatch.matchTime}</div>`;
+}
+else if(footballMatch.fullMatchDate!=='-:-' && footballMatch.resultObject.state !==''){
+return `<div class="team">${footballMatch.fullMatchDate}</div>`;
 }
 else{
   return '';
