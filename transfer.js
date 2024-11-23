@@ -1,4 +1,7 @@
-let seasonDate='2024';
+
+const d = new Date();
+let year = d.getFullYear();
+let seasonDate=year;
 let seasonday='1';
 load();
 function load(){
